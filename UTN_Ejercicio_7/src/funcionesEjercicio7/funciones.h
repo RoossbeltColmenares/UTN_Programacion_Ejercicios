@@ -19,6 +19,13 @@ typedef struct // Campos o Atributos
 	float precio;
 } eProducto; // Tipo de dato
 
+typedef struct // Campos o Atributos
+{
+	int EstadoProducto;
+	char tipo[50];
+	float precio;
+} ePromedioProducto; // Tipo de dato
+
 #ifndef FUNCIONESEJERCICIO7_FUNCIONES_H_
 #define FUNCIONESEJERCICIO7_FUNCIONES_H_
 
@@ -30,7 +37,7 @@ void imprimirProductos(eProducto producto[], int tamanno);
 
 int verificarPosicion(int numeroID, eProducto producto[], int *posicion, int tamanno);
 
-void llenarUnProducto(int posicionLibre, eProducto producto[], int tamanno);
+void llenarUnProducto(int posicionLibre, eProducto producto[]);
 
 int comprobarEspacio(int *posicionLibre, eProducto producto[], int tamanno);
 
@@ -45,4 +52,8 @@ void ordenarVector(eProducto producto[], int tamanno, int ordenDeOrdenamiento);
 void vectorOriginal(eProducto producto[], int tamanno);
 
 int verificarID(int numeroID, eProducto producto[], int *posicion, int tamanno);
+
+void productoMasCaro(eProducto producto[], int tamanno);
+
+void precioPromedioPorTipo(eProducto producto[], int tamanno);
 #endif /* FUNCIONESEJERCICIO7_FUNCIONES_H_ */

@@ -14,7 +14,7 @@ void altaProducto(eProducto producto[], int tamanno)
 
 	if (comprobarEspacio(&posicionLibre, producto, tamanno) == 1)
 	{
-		llenarUnProducto(posicionLibre, producto, tamanno);
+		llenarUnProducto(posicionLibre, producto);
 	}
 	else
 	{
@@ -47,7 +47,7 @@ int comprobarEspacio(int *posicionLibre, eProducto producto[], int tamanno)
 	return valorRetorno;
 }
 
-void llenarUnProducto(int posicionLibre, eProducto producto[], int tamanno)
+void llenarUnProducto(int posicionLibre, eProducto producto[])
 {
 	char descripcionProducto[50];
 	char nacionalidadProducto[50];
@@ -232,6 +232,50 @@ void vectorOriginal(eProducto producto[], int tamanno)
 			}
 		}
 	}
+}
+
+void productoMasCaro(eProducto producto[], int tamanno)
+{
+	int i;
+	int j;
+	int l;
+	eProducto auxiliarProductoMasCaro[tamanno];
+
+	//Inicializo con el primer valor de productos
+	inicializarEstadoProductos(auxiliarProductoMasCaro, tamanno);
+	auxiliarProductoMasCaro[0] = producto[0];
+	auxiliarProductoMasCaro[0].EstadoProducto = 1;
+
+	j = 0;
+	l = 0;
+
+	//Encuentro el valor mas grande de todos los productos
+	for (i = 1; i < tamanno; i++)
+	{
+		if (auxiliarProductoMasCaro[0].precio < producto[i].precio && producto[i].EstadoProducto == 1)
+		{
+			auxiliarProductoMasCaro[0] = producto[i];
+			auxiliarProductoMasCaro[0].EstadoProducto = 1;
+			l++;
+		}
+	}
+
+	//Ahora encuentro si hay mas productos con ese precio mayor encontrado para tambien guardarlo
+	for (i = l; i < tamanno; i++)
+	{
+		if (auxiliarProductoMasCaro[0].precio == producto[i].precio && producto[i].EstadoProducto == 1)
+		{
+			auxiliarProductoMasCaro[j] = producto[i];
+			auxiliarProductoMasCaro[j].EstadoProducto = 1;
+			j++;
+		}
+	}
+
+	imprimirProductos(auxiliarProductoMasCaro, tamanno);
+}
+
+void precioPromedioPorTipo(eProducto producto[], int tamanno)
+{
 
 }
 

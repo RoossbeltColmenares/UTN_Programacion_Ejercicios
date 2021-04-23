@@ -36,8 +36,10 @@ int main(void)
 		printf("\n4. Listado Productos");
 		printf("\n5. Listado ordenado por precio");
 		printf("\n6. Listado ordenado por descripcion");
-		printf("\n7. Salir");
-		ingresarIntR(&opcionIngresada, "\nIngresa la opcion: ", "\nError, ingresa la opcion: ", 1, 7);
+		printf("\n7. El/Los productos mas caros son:");
+		printf("\n8. Precio promedio por tipo de producto:");
+		printf("\n9. Salir");
+		ingresarIntR(&opcionIngresada, "\nIngresa la opcion: ", "\nError, ingresa la opcion: ", 1, 9);
 
 		switch (opcionIngresada)
 		{
@@ -91,8 +93,18 @@ int main(void)
 
 			case 7:
 				system("cls");
-				opcionIngresada = 7;
+				productoMasCaro(producto, tamanno);
+				break;
+
+			case 8:
+				system("cls");
+				precioPromedioPorTipo(producto, tamanno);
+				break;
+
+			case 9:
+				system("cls");
+				opcionIngresada = 9;
 				break;
 		}
-	} while (opcionIngresada != 7);
+	} while (opcionIngresada != 9);
 }
