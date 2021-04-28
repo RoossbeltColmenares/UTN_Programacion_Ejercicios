@@ -26,13 +26,15 @@ typedef struct
 
 void inicializarEstadosAlumnos(eAlumno alumno[], int tamanno);
 
-void altaEstudiantes(eAlumno alumno[], int tamanno);
+void altaEstudiantes(eAlumno alumno[], eCurso curso[], int tamannoAlumno, int tamnanoCurso);
 
-void imprimirAlumnos(eAlumno alumno[], int tamanno);
+void imprimirAlumnos(eAlumno alumno[], eCurso curso[], int tamannoAlumno, int tamannoCurso);
+
+void imprimirAlumnosCurso(eAlumno alumno[], eCurso curso[], int tamannoAlumno, int tamannoCurso);
 
 int verificarPosicion(int numeroID, eAlumno alumno[], int *posicion, int tamanno);
 
-void pedirDatosAlumno(int posicionLibre, eAlumno alumno[]);
+void pedirDatosAlumno(int posicionLibre, eAlumno alumno[], eCurso curso[], int tamannoCurso);
 
 int comprobarEspacioAlumnos(int *posicionLibre, eAlumno alumno[], int tamanno);
 

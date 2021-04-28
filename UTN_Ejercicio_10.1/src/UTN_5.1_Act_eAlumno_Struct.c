@@ -48,7 +48,7 @@ int main(void)
 		{
 			case 1:
 				system("cls");
-				altaEstudiantes(alumno, tamannoAlumno);
+				altaEstudiantes(alumno, curso, tamannoAlumno, tamannoCurso);
 				break;
 
 			case 2:
@@ -59,8 +59,8 @@ int main(void)
 
 			case 3:
 				system("cls");
-				ingresarIntR(&opcionIDIngresado, "Ingrese 1 si quieres modificar el nombre, \n ingrese 2 si quieres modificar la nota 1, ingrese 3 si quieres modificar la nota 3 ",
-						"Error, Ingrese 1 si quieres modificar el nombre, \n ingrese 2 si quieres modificar la nota 1, \n ingrese 3 si quieres modificar la nota 3: ", 1, 3);
+				ingresarIntR(&opcionIDIngresado, "Ingrese 1 si quieres modificar el nombre,\ningrese 2 si quieres modificar la nota 1,\ningrese 3 si quieres modificar la nota 3: ",
+						"Error, Ingrese 1 si quieres modificar el nombre,\ningrese 2 si quieres modificar la nota 1,\ningrese 3 si quieres modificar la nota 3: ", 1, 3);
 				if (opcionIDIngresado == 1)
 				{
 					system("cls");
@@ -86,20 +86,29 @@ int main(void)
 
 			case 4:
 				system("cls");
-				imprimirAlumnos(alumno, tamannoAlumno);
+				ingresarIntR(&opcionIDIngresado, "Ingrese 1 si quieres imprimir Todos los datos del estudiante,\ningrese 2 si quieres imprimir solo el nombre y curso de los estudiantes: ",
+						"Error, Ingrese 1 si quieres imprimir Todos los datos del estudiante,\ningrese 2 si quieres imprimir solo el nombre y curso de los estudiantes: ", 1, 2);
+				if (opcionIDIngresado == 1)
+				{
+					imprimirAlumnos(alumno, curso, tamannoAlumno, tamannoCurso);
+				}
+				else
+				{
+					imprimirAlumnosCurso(alumno,curso,tamannoAlumno,tamannoCurso);
+				}
 				break;
 
 			case 5:
 				system("cls");
 				ordenarVector(alumno, tamannoAlumno, 1);
-				imprimirAlumnos(alumno, tamannoAlumno);
+				imprimirAlumnos(alumno,curso,tamannoAlumno,tamannoCurso);
 				vectorOriginal(alumno, tamannoAlumno);
 				break;
 
 			case 6:
 				system("cls");
 				ordenarVector(alumno, tamannoAlumno, 2);
-				imprimirAlumnos(alumno, tamannoAlumno);
+				imprimirAlumnos(alumno,curso,tamannoAlumno,tamannoCurso);
 				vectorOriginal(alumno, tamannoAlumno);
 				break;
 
@@ -115,7 +124,7 @@ int main(void)
 					printf("\n5. Listado ordenado por duracion de la carrera");
 					printf("\n6. Listado ordenado por nombre de la carrera");
 					printf("\n7. Volver al menu principal");
-					ingresarIntR(&opcionIngresada, "\nIngresa la opcion: ", "\nError, ingresa la opcion: ", 1, 8);
+					ingresarIntR(&opcionIngresada, "\nIngresa la opcion: ", "\nError, ingresa la opcion: ", 1, 7);
 					switch (opcionIngresada)
 					{
 						case 1:
@@ -171,7 +180,7 @@ int main(void)
 							opcionIngresada = 7;
 							break;
 					}
-				} while(opcionIngresada != 7);
+				} while (opcionIngresada != 7);
 
 				break;
 

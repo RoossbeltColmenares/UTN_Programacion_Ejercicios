@@ -9,13 +9,13 @@
 
 #include <string.h>
 
-void altaEstudiantes(eAlumno alumno[], int tamanno)
+void altaEstudiantes(eAlumno alumno[], eCurso curso[], int tamanno, int tamnanoCurso)
 {
 	int posicionLibre;
 
 	if (comprobarEspacioAlumnos(&posicionLibre, alumno, tamanno) == 1)
 	{
-		pedirDatosAlumno(posicionLibre, alumno);
+		pedirDatosAlumno(posicionLibre, alumno, curso, tamnanoCurso);
 	}
 	else
 	{
@@ -33,7 +33,6 @@ void inicializarEstadosAlumnos(eAlumno alumno[], int tamanno)
 	}
 }
 
-
 int comprobarEspacioAlumnos(int *posicionLibre, eAlumno alumno[], int tamanno)
 {
 	int valorRetorno;
@@ -49,11 +48,12 @@ int comprobarEspacioAlumnos(int *posicionLibre, eAlumno alumno[], int tamanno)
 	return valorRetorno;
 }
 
-void pedirDatosAlumno(int posicionLibre, eAlumno alumno[])
+void pedirDatosAlumno(int posicionLibre, eAlumno alumno[], eCurso curso[], int tamannoCurso)
 {
 	char nombreAlumno[50];
 	float notaIngresadaUno;
 	float notaIngresadaDos;
+	int idCursoIngresado;
 
 	alumno[posicionLibre].estaVacio = 1;
 	alumno[posicionLibre].legajo = posicionLibre;
@@ -68,6 +68,11 @@ void pedirDatosAlumno(int posicionLibre, eAlumno alumno[])
 	alumno[posicionLibre].nota2 = notaIngresadaDos;
 
 	alumno[posicionLibre].promedio = (float) (notaIngresadaUno + notaIngresadaDos) / 2;
+
+	system("cls");
+	imprimirCursos(curso, tamannoCurso);
+	ingresarIntR(&idCursoIngresado, "\nIngresa el Id de la carrera a seleccionar: ", "Error, Ingresa el Id de la carrera a seleccionar: ", 0, tamannoCurso);
+	alumno[posicionLibre].idCurso = idCursoIngresado;
 }
 
 void bajarEstudiante(int opcionIDIngresado, eAlumno alumno[], int tamanno)
@@ -122,19 +127,61 @@ int verificarID(int numeroID, eAlumno alumno[], int *posicion, int tamanno)
 	return valorRetorno;
 }
 
-void imprimirAlumnos(eAlumno alumno[], int tamanno)
+void imprimirAlumnos(eAlumno alumno[], eCurso curso[], int tamannoAlumno, int tamannoCurso)
 {
 	int i;
+	int j;
 	int comprobacion;
 
 	comprobacion = 0;
 
-	for (i = 0; i < tamanno; i++)
+	for (i = 0; i < tamannoAlumno; i++)
 	{
-		if (alumno[i].estaVacio > 0)
+		for (j = 0; j < tamannoCurso; j++)
 		{
-			printf("\n%d     %s     %d     %d     %.2f", alumno[i].legajo, alumno[i].nombre, alumno[i].nota1, alumno[i].nota2, alumno[i].promedio);
-			comprobacion = 1;
+			if (alumno[i].estaVacio > 0)
+			{
+				if (alumno[i].idCurso == curso[j].idCurso)
+				{
+					printf("\n%d     %s     %d     %d     %.2f     %s     %.1f", alumno[i].legajo, alumno[i].nombre, alumno[i].nota1, alumno[i].nota2, alumno[i].promedio, curso[j].descripcion, curso[j].duracion);
+					comprobacion = 1;
+					break;
+				}
+			}
+		}
+	}
+
+	if (comprobacion == 0)
+	{
+		printf("No hay alumnos en la lista");
+	}
+}
+
+void imprimirAlumnosCurso(eAlumno alumno[], eCurso curso[], int tamannoAlumno, int tamannoCurso)
+{
+	int i;
+	int j;
+	int comprobacion;
+
+	comprobacion = 0;
+
+	for (i = 0; i < tamannoCurso; i++)
+	{
+		if (curso[i].estaVacio > 0)
+		{
+			printf("\n%d     %s", curso[i].idCurso, curso[i].descripcion);
+			for (j = 0; j < tamannoAlumno; j++)
+			{
+				if (alumno[j].estaVacio > 0)
+				{
+					if (alumno[j].idCurso == curso[i].idCurso)
+					{
+						printf("\n%s     %2.f", alumno[j].nombre, alumno[j].promedio);
+						comprobacion = 1;
+					}
+
+				}
+			}
 		}
 	}
 
